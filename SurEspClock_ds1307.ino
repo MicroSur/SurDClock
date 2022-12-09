@@ -165,6 +165,7 @@ void getDate(char *psz)
     ntp_get = false;
   } else {
     wd = myRTC.dow;
+    wd = wd == 0 ? 7 : wd ; // days 1-7
   }
   sprintf(psz, "%c%c%02d/%02d", wd + 60, (wifi_ok ? '.' : ' '), dd, mm);
   //strcpy(szMesgNew, "00 00.00");
@@ -187,7 +188,7 @@ void timeCheck() {
   s = tm.tm_sec;          // seconds after the minute  0-61*
   //* tm_sec is generally 0-59. The extra range is to accommodate for leap seconds in certain systems.
   wd = tm.tm_wday;         // days since Sunday 0-6
-  wd = wd == 0 ? 7 : wd ; // days 1-7
+  //wd = wd == 0 ? 7 : wd ; // days 1-7
   //(tm.tm_isdst == 1)             // Daylight Saving Time flag
 
   String yearStr = String(yy);
